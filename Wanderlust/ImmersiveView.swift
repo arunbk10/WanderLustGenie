@@ -32,12 +32,7 @@ struct ImmersiveView: View {
      
     // Plane for map
     @State var planeEntity: Entity = {
-        let wallAnchor = AnchorEntity(.plane(.vertical, classification: .wall, minimumBounds: SIMD2<Float>(0.008, 0.008)))
-        let planeMesh = MeshResource.generatePlane(width: 1.5, depth: 1, cornerRadius: 0.1)
-        let material = ImmersiveView.loadImageMaterial(imageUrl: "sketch")
-        let planeEntity = ModelEntity(mesh: planeMesh, materials: [material])
-        planeEntity.name = "canvas"
-        wallAnchor.addChild(planeEntity)
+        let wallAnchor = AnchorEntity(.plane(.horizontal, classification: .table, minimumBounds: SIMD2<Float>(0.008, 0.008)))
         
         return wallAnchor
     }()
@@ -67,6 +62,12 @@ struct ImmersiveView: View {
                 room.setScale([0.01,0.01,0.01], relativeTo: nil)
                 // Add panaromic lobby view as immersive view
                 room.addChild(ImmersiveView.setUpImmersiveEntity())
+                
+                guard let transform = attachments.entity(for: "mapWindow") else { return }
+                let flip = 270 * Float.pi / 180
+                ImmersiveView.rotateEntityAroundXAxis(entity: transform, angle: flip)
+                planeEntity.addChild(transform)
+
             }
             catch
             {
@@ -83,6 +84,10 @@ struct ImmersiveView: View {
                         .padding(30)
                         .glassBackgroundEffect()
                 }.opacity(shouldShowText ? 1 : 0)
+            }
+            
+            Attachment(id: "mapWindow") {
+                MapView()
             }
         }
         .gesture(SpatialTapGesture().targetedToAnyEntity().onEnded {
@@ -152,6 +157,20 @@ struct ImmersiveView: View {
 
         // Create a quaternion representing a rotation around the Y-axis
         let rotation = simd_quatf(angle: angle, axis: [0, 1, 0])
+
+        // Combine the rotation with the current transform
+        currentTransform.rotation = rotation * currentTransform.rotation
+
+        // Apply the new transform to the entity
+        entity.transform = currentTransform
+    }
+    
+    static func rotateEntityAroundXAxis(entity: Entity, angle: Float) {
+        // Get the current transform of the entity
+        var currentTransform = entity.transform
+
+        // Create a quaternion representing a rotation around the X-axis
+        let rotation = simd_quatf(angle: angle, axis: [1, 0, 0])
 
         // Combine the rotation with the current transform
         currentTransform.rotation = rotation * currentTransform.rotation

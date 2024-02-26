@@ -14,6 +14,7 @@
 		FC96DCEE2B87597D004F7D42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC96DCED2B87597D004F7D42 /* Assets.xcassets */; };
 		FC96DCF12B87597D004F7D42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC96DCF02B87597D004F7D42 /* Preview Assets.xcassets */; };
 		FC96DCF92B875BA3004F7D42 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DCF82B875BA3004F7D42 /* ChatViewModel.swift */; };
+		FC96DCFB2B8C863F004F7D42 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DCFA2B8C863F004F7D42 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FC96DCF02B87597D004F7D42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FC96DCF22B87597D004F7D42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC96DCF82B875BA3004F7D42 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		FC96DCFA2B8C863F004F7D42 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				FC96DCF82B875BA3004F7D42 /* ChatViewModel.swift */,
 				FC96DCE92B87597C004F7D42 /* ContentView.swift */,
 				FC96DCEB2B87597C004F7D42 /* ImmersiveView.swift */,
+				FC96DCFA2B8C863F004F7D42 /* MapView.swift */,
 				FC96DCED2B87597D004F7D42 /* Assets.xcassets */,
 				FC96DCF22B87597D004F7D42 /* Info.plist */,
 				FC96DCEF2B87597D004F7D42 /* Preview Content */,
@@ -162,6 +165,7 @@
 			files = (
 				FC96DCEA2B87597C004F7D42 /* ContentView.swift in Sources */,
 				FC96DCE82B87597C004F7D42 /* WanderlustApp.swift in Sources */,
+				FC96DCFB2B8C863F004F7D42 /* MapView.swift in Sources */,
 				FC96DCF92B875BA3004F7D42 /* ChatViewModel.swift in Sources */,
 				FC96DCEC2B87597C004F7D42 /* ImmersiveView.swift in Sources */,
 			);
