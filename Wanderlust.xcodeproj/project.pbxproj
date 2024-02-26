@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8C25BC92B8C88A5009B96C0 /* SiriWaveView in Frameworks */ = {isa = PBXBuildFile; productRef = D8C25BC82B8C88A5009B96C0 /* SiriWaveView */; };
+		D8C25BCC2B8C8921009B96C0 /* XCAOpenAIClient in Frameworks */ = {isa = PBXBuildFile; productRef = D8C25BCB2B8C8921009B96C0 /* XCAOpenAIClient */; };
+		D8C25BD22B8C955B009B96C0 /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C25BD12B8C955B009B96C0 /* ConversationView.swift */; };
+		D8C25BD42B8C95B1009B96C0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C25BD32B8C95B1009B96C0 /* ViewModel.swift */; };
+		D8C25BD62B8C95CF009B96C0 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C25BD52B8C95CF009B96C0 /* MessageView.swift */; };
+		D8C25BD82B8C963F009B96C0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C25BD72B8C963F009B96C0 /* Models.swift */; };
 		FC96DCE62B87597C004F7D42 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = FC96DCE52B87597C004F7D42 /* RealityKitContent */; };
 		FC96DCE82B87597C004F7D42 /* WanderlustApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DCE72B87597C004F7D42 /* WanderlustApp.swift */; };
 		FC96DCEA2B87597C004F7D42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DCE92B87597C004F7D42 /* ContentView.swift */; };
@@ -17,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D8C25BD12B8C955B009B96C0 /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
+		D8C25BD32B8C95B1009B96C0 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		D8C25BD52B8C95CF009B96C0 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		D8C25BD72B8C963F009B96C0 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FC96DCE02B87597C004F7D42 /* Wanderlust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wanderlust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC96DCE42B87597C004F7D42 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		FC96DCE72B87597C004F7D42 /* WanderlustApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WanderlustApp.swift; sourceTree = "<group>"; };
@@ -33,7 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C25BCC2B8C8921009B96C0 /* XCAOpenAIClient in Frameworks */,
 				FC96DCE62B87597C004F7D42 /* RealityKitContent in Frameworks */,
+				D8C25BC92B8C88A5009B96C0 /* SiriWaveView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,10 +75,14 @@
 				FC96DCE72B87597C004F7D42 /* WanderlustApp.swift */,
 				FC96DCF82B875BA3004F7D42 /* ChatViewModel.swift */,
 				FC96DCE92B87597C004F7D42 /* ContentView.swift */,
+				D8C25BD72B8C963F009B96C0 /* Models.swift */,
 				FC96DCEB2B87597C004F7D42 /* ImmersiveView.swift */,
+				D8C25BD52B8C95CF009B96C0 /* MessageView.swift */,
+				D8C25BD32B8C95B1009B96C0 /* ViewModel.swift */,
 				FC96DCED2B87597D004F7D42 /* Assets.xcassets */,
 				FC96DCF22B87597D004F7D42 /* Info.plist */,
 				FC96DCEF2B87597D004F7D42 /* Preview Content */,
+				D8C25BD12B8C955B009B96C0 /* ConversationView.swift */,
 			);
 			path = Wanderlust;
 			sourceTree = "<group>";
@@ -105,6 +121,8 @@
 			name = Wanderlust;
 			packageProductDependencies = (
 				FC96DCE52B87597C004F7D42 /* RealityKitContent */,
+				D8C25BC82B8C88A5009B96C0 /* SiriWaveView */,
+				D8C25BCB2B8C8921009B96C0 /* XCAOpenAIClient */,
 			);
 			productName = Wanderlust;
 			productReference = FC96DCE02B87597C004F7D42 /* Wanderlust.app */;
@@ -134,6 +152,10 @@
 				Base,
 			);
 			mainGroup = FC96DCD72B87597B004F7D42;
+			packageReferences = (
+				D8C25BC72B8C88A5009B96C0 /* XCRemoteSwiftPackageReference "SiriWaveView" */,
+				D8C25BCA2B8C8921009B96C0 /* XCRemoteSwiftPackageReference "XCAOpenAIClient" */,
+			);
 			productRefGroup = FC96DCE12B87597C004F7D42 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -163,7 +185,11 @@
 				FC96DCEA2B87597C004F7D42 /* ContentView.swift in Sources */,
 				FC96DCE82B87597C004F7D42 /* WanderlustApp.swift in Sources */,
 				FC96DCF92B875BA3004F7D42 /* ChatViewModel.swift in Sources */,
+				D8C25BD82B8C963F009B96C0 /* Models.swift in Sources */,
 				FC96DCEC2B87597C004F7D42 /* ImmersiveView.swift in Sources */,
+				D8C25BD42B8C95B1009B96C0 /* ViewModel.swift in Sources */,
+				D8C25BD62B8C95CF009B96C0 /* MessageView.swift in Sources */,
+				D8C25BD22B8C955B009B96C0 /* ConversationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +326,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow Microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Allow Speech";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,6 +353,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow Microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Allow Speech";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,7 +392,36 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		D8C25BC72B8C88A5009B96C0 /* XCRemoteSwiftPackageReference "SiriWaveView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alfianlosari/SiriWaveView";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D8C25BCA2B8C8921009B96C0 /* XCRemoteSwiftPackageReference "XCAOpenAIClient" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alfianlosari/XCAOpenAIClient";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		D8C25BC82B8C88A5009B96C0 /* SiriWaveView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8C25BC72B8C88A5009B96C0 /* XCRemoteSwiftPackageReference "SiriWaveView" */;
+			productName = SiriWaveView;
+		};
+		D8C25BCB2B8C8921009B96C0 /* XCAOpenAIClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8C25BCA2B8C8921009B96C0 /* XCRemoteSwiftPackageReference "XCAOpenAIClient" */;
+			productName = XCAOpenAIClient;
+		};
 		FC96DCE52B87597C004F7D42 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;

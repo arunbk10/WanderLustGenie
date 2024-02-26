@@ -14,7 +14,7 @@ struct WanderlustApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(viewModel)
+            ConversationView()           
         }.windowStyle(.plain)
 
         ImmersiveSpace(id: "Chatbot") {
