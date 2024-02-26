@@ -1,0 +1,24 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "Reality Composer Pro Version 1.0 (409.60.6)"
+    }
+    defaultPrim = "Root"
+    metersPerUnit = 1
+    upAxis = "Y"
+)
+
+def Xform "Root"
+{
+    def "ImageToStl_com_room" (
+        active = true
+        prepend references = @ImageToStl.com_room.usdc@
+    )
+    {
+        quatf xformOp:orient = (0.7061803, 0.036185294, -0.036185298, 0.7061803)
+        float3 xformOp:scale = (1, 1, 1)
+        float3 xformOp:translate = (-0.005246457, 0, 0.027191818)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+    }
+}
+
