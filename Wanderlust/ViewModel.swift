@@ -10,22 +10,13 @@ import AVFoundation
 import Observation
 import XCAOpenAIClient
 
-struct ChatMessage:  Identifiable  {
-    var id: UUID
-    let text: String
-    let isUser: Bool
-}
-
 @Observable
 class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
      var currentIndex = 0
-    var botresponse: [ChatMessage] = [.init(id: UUID(), text: "Sounds exciting! Would you prefer a beach destination, a mountain retreat, or a city escape?", isUser: false)
-                                   ,.init(id: UUID(), text: "sure.... . select the option below ", isUser: false)]
-     var messages: [ChatMessage] = [.init(id: UUID(), text: "Good morning! How can I assist you today? ", isUser: false)]
-    var demoResponses : [String] = ["Hi there! I'm looking for recommendations for a weekend getaway.","I'm leaning towards a mountain retreat, somewhere with hiking trails and beautiful scenery."]
+   
     
-    let client = OpenAIClient(apiKey: "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")
+    let client = OpenAIClient(apiKey: "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")
     var audioPlayer: AVAudioPlayer!
     var audioRecorder: AVAudioRecorder!
     let voiceType: VoiceType = .alloy
@@ -162,11 +153,11 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
             do {
                 self.state = .processingSpeech
                 let prompt = try await client.generateAudioTransciptions(audioData: audioData)
-                messages.append(ChatMessage(id: UUID(), text: prompt, isUser: true))
+                Constants.messages.append(ChatMessage(id: UUID(), text: prompt, isUser: true))
                 try Task.checkCancellation()
                 
                 var foundMatch = false
-                for response in demoResponses {
+                for response in Constants.demoResponses {
                     if checkMatch(message: prompt, prompt: response) {
                         foundMatch = true
                         break
@@ -174,11 +165,11 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
                 }
                 
                 if foundMatch {
-                    if currentIndex < botresponse.count {
+                    if currentIndex < Constants.botresponse.count {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                             do {
-                                try self.playAudio(data: self.botresponse[self.currentIndex].text)
-                                self.messages.append(ChatMessage(id: UUID(), text: self.botresponse[self.currentIndex].text, isUser: false))
+                                try self.playAudio(data: Constants.botresponse[self.currentIndex].text)
+                                Constants.messages.append(ChatMessage(id: UUID(), text: Constants.botresponse[self.currentIndex].text, isUser: false))
                                 self.currentIndex += 1
                             } catch {
                                 print("Error playing audio: \(error)")
@@ -188,8 +179,8 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         do{
-                           try self.playAudio(data: "Sorry, something went wrong. Please try again.")
-                            self.messages.append(ChatMessage(id: UUID(), text: "Sorry, something went wrong. Please try again.", isUser: false))
+                           try self.playAudio(data: Constants.ErrorMessage)
+                            Constants.messages.append(ChatMessage(id: UUID(), text: Constants.ErrorMessage, isUser: false))
                         }catch{
                             print("error")
                         }

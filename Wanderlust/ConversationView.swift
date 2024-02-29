@@ -17,7 +17,7 @@ struct ConversationView: View {
         ZStack(alignment: .bottomTrailing) {
             VStack {
                 ScrollView {
-                    ForEach(vm.messages) { message in
+                    ForEach(Constants.messages) { message in
                         VStack() {
                             if message.isUser {
                                 HStack {
@@ -36,6 +36,7 @@ struct ConversationView: View {
                     }
                 }.frame(height: 700)
                     .padding(.bottom, 20)
+                   
                 VStack(alignment: .trailing, spacing: 10) {
                     SiriWaveView()
                         .power(power: vm.audioPower)
@@ -47,7 +48,7 @@ struct ConversationView: View {
             startCaptureButton
         }.onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                let utterance = AVSpeechUtterance(string:"good morning! how can I assist You today?" )
+                let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
                 
                 utterance.rate = 0.4
                 utterance.volume = 0.9
