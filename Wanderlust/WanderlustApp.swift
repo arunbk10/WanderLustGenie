@@ -16,6 +16,8 @@ struct WanderlustApp: App {
         WindowGroup {
             ConversationView()           
         }.windowStyle(.plain)
+            .defaultSize(width: 0.80, height: 0.75, depth: 1.0, in: .meters)
+                .windowStyle(.plain)
 
         ImmersiveSpace(id: "Chatbot") {
             ImmersiveView().environment(viewModel)

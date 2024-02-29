@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ConversationView.swift
 //  VoiceAssistent
 //
 //  Created by Kishor L D on 22/02/24.
@@ -34,7 +34,8 @@ struct ConversationView: View {
                             }
                         }
                     }
-                }
+                }.frame(height: 700)
+                    .padding(.bottom, 20)
                 VStack(alignment: .trailing, spacing: 10) {
                     SiriWaveView()
                         .power(power: vm.audioPower)
@@ -43,8 +44,7 @@ struct ConversationView: View {
                         .overlay { overlayView }
                 }
             }
-            startCaptureButton // Place the startCaptureButton outside VStack
-                 // Add padding to maintain 10 points distance from the trailing edge
+            startCaptureButton
         }.onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let utterance = AVSpeechUtterance(string:"good morning! how can I assist You today?" )
@@ -56,7 +56,7 @@ struct ConversationView: View {
             }
         }
     }
-        
+    
     
     @ViewBuilder
     var overlayView: some View {
@@ -64,8 +64,6 @@ struct ConversationView: View {
         case .idle, .error:
             
             HStack{
-//                startCaptureButton
-//                    .frame(alignment:.trailing)
             }
         case .processingSpeech:
             Image(systemName: "brain")
@@ -90,19 +88,11 @@ struct ConversationView: View {
                 Image("Siri")
                     .symbolRenderingMode(.multicolor)
                     .font(.system(size: 44))
-            
-                    
-//            } else if vm.state == .processingSpeech || vm.state == .playingSpeech {
-//                Image("Siri")
-//                    .symbolRenderingMode(.monochrome)
-//                    .foregroundStyle(.red)
-//                    .font(.system(size: 44))
-//
             } else {
                 Image("Siri")
                     .symbolRenderingMode(.multicolor)
                     .font(.system(size: 128))
-                   
+                
             }
         }
         .buttonStyle(.borderless)

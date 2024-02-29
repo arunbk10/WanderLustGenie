@@ -73,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				FC96DCE72B87597C004F7D42 /* WanderlustApp.swift */,
+				D8C25BD12B8C955B009B96C0 /* ConversationView.swift */,
 				FC96DCF82B875BA3004F7D42 /* ChatViewModel.swift */,
 				FC96DCE92B87597C004F7D42 /* ContentView.swift */,
 				D8C25BD72B8C963F009B96C0 /* Models.swift */,
@@ -82,7 +83,6 @@
 				FC96DCED2B87597D004F7D42 /* Assets.xcassets */,
 				FC96DCF22B87597D004F7D42 /* Info.plist */,
 				FC96DCEF2B87597D004F7D42 /* Preview Content */,
-				D8C25BD12B8C955B009B96C0 /* ConversationView.swift */,
 			);
 			path = Wanderlust;
 			sourceTree = "<group>";

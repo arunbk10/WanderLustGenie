@@ -23,9 +23,9 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     var botresponse: [ChatMessage] = [.init(id: UUID(), text: "Sounds exciting! Would you prefer a beach destination, a mountain retreat, or a city escape?", isUser: false)
                                    ,.init(id: UUID(), text: "sure.... . select the option below ", isUser: false)]
      var messages: [ChatMessage] = [.init(id: UUID(), text: "Good morning! How can I assist you today? ", isUser: false)]
-    var finalResponses : [ChatMessage] = []
+    var demoResponses : [String] = ["Hi there! I'm looking for recommendations for a weekend getaway.","I'm leaning towards a mountain retreat, somewhere with hiking trails and beautiful scenery."]
     
-    let client = OpenAIClient(apiKey: "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")
+    let client = OpenAIClient(apiKey: "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")
     var audioPlayer: AVAudioPlayer!
     var audioRecorder: AVAudioRecorder!
     let voiceType: VoiceType = .alloy
@@ -140,6 +140,23 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         }
     }
     
+    func checkMatch(message: String, prompt: String) -> Bool {
+        let messageWords = message.components(separatedBy: .whitespaces)
+        let promptWords = prompt.components(separatedBy: .whitespaces)
+        var matchCount = 0
+        for messageWord in messageWords {
+            for promptWord in promptWords {
+                if messageWord.lowercased() == promptWord.lowercased() {
+                    matchCount += 1
+                }
+            }
+            if matchCount >= 2 {
+                return true
+            }
+        }
+        return false
+    }
+    
     func processSpeechTask(audioData: Data) -> Task<Void, Never> {
         Task { @MainActor [unowned self] in
             do {
@@ -147,20 +164,39 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
                 let prompt = try await client.generateAudioTransciptions(audioData: audioData)
                 messages.append(ChatMessage(id: UUID(), text: prompt, isUser: true))
                 try Task.checkCancellation()
-               
-                if currentIndex < botresponse.count {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        do {
-                            try self.playAudio(data: self.botresponse[self.currentIndex].text)
-                            self.messages.append(ChatMessage(id: UUID(), text: self.botresponse[self.currentIndex].text, isUser: false))
-                            self.currentIndex += 1
-                        } catch {
-                            print("Error playing audio: \(error)")
-                            // Handle the error as needed, e.g., show an alert to the user
-                        }
+                
+                var foundMatch = false
+                for response in demoResponses {
+                    if checkMatch(message: prompt, prompt: response) {
+                        foundMatch = true
+                        break
                     }
                 }
-
+                
+                if foundMatch {
+                    if currentIndex < botresponse.count {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            do {
+                                try self.playAudio(data: self.botresponse[self.currentIndex].text)
+                                self.messages.append(ChatMessage(id: UUID(), text: self.botresponse[self.currentIndex].text, isUser: false))
+                                self.currentIndex += 1
+                            } catch {
+                                print("Error playing audio: \(error)")
+                            }
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        do{
+                           try self.playAudio(data: "Sorry, something went wrong. Please try again.")
+                            self.messages.append(ChatMessage(id: UUID(), text: "Sorry, something went wrong. Please try again.", isUser: false))
+                        }catch{
+                            print("error")
+                        }
+                        
+                    }
+                }
+                
             } catch {
                 if Task.isCancelled { return }
                 state = .error(error)
@@ -168,6 +204,8 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
             }
         }
     }
+
+
 
     func playAudio(data: String) throws {
         print(data)
