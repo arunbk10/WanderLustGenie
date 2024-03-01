@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
     
     var body: some View {
         VStack {
@@ -16,7 +18,8 @@ struct MapView: View {
             
             Spacer()
             Button("Go to Hotel View"){
-                
+                dismissWindow(id: "MapView")
+                openWindow(id: "HotelListView")
             }
         }.padding(10)
             .glassBackgroundEffect()

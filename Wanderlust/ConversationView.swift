@@ -50,20 +50,6 @@ struct ConversationView: View {
             }
             startCaptureButton
             
-            if isMapButtonShow {
-                Button("Locate on Map") {
-                           dismissWindow(id: "ConverseView")
-                        openWindow(id: "MapView")
-                }.padding(20)
-                    
-                    .frame(width: 300, height: 80)
-                    .background(.purple).opacity(0.7)
-                    .font(.largeTitle)
-                    .cornerRadius(30)//                    .buttonStyle(PlainButtonStyle())
-                    
-                   
-                
-            }
         }.onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
@@ -77,7 +63,9 @@ struct ConversationView: View {
         .onChange(of: vm.currentIndex) { newValue in
             if newValue >= Constants.botresponse.count {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
-                    isMapButtonShow = true                }
+                    isMapButtonShow = true    
+                    dismissWindow(id: "ConverseView")
+                 openWindow(id: "MapView")}
             }
         }
     }
