@@ -73,7 +73,7 @@ struct HotelListView: View {
             }
 
             if showImmersiveSpace { 
-                SuggestionsView().padding(.bottom,73).padding(.top,70)// Only show buttons when ImmersiveSpace or HotelImmersiveSpace is open
+                SuggestionsView()
                 HStack {
                     
                     Toggle(isOn: $showImmersiveSpace) {
@@ -110,7 +110,7 @@ struct HotelListView: View {
                             buttonTitle = (buttonTitle == "Navigate to HotelRoom") ? "Navigate to StreetView" : "Navigate to HotelRoom"
                         }
                     } label: {
-                        Text(buttonTitle).padding()
+                        Text(buttonTitle).padding(16)
                         
                     }.buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle
                         .background(Color.white)
@@ -144,11 +144,6 @@ struct HotelistImmersiveView: View {
             RealityView { content in
                 content.add(viewModel.setupContentEntity())
 
-                // Add a text entity
-//                let textEntity = ModelEntity(mesh: .generateText("Welcome To NewYork.", extrusionDepth: 0.1), materials: [SimpleMaterial(color: .white, isMetallic: false)])
-//                textEntity.scale = SIMD3<Float>(repeating: 0.01)
-//                textEntity.position = [0, 1.1, -2] // Adjust position as needed
-//                content.add(textEntity)
             }
             .task {
                 try? await viewModel.setSnapshot()

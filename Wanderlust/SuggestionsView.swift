@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SuggestionsView.swift
 //  Recommendation
 //
 //  Created by Shamanth R on 01/03/24.
@@ -44,7 +44,7 @@ struct SuggestionsView: View {
                     .transition(.move(edge: .leading)) // Add transition for smoother appearance
             }
         }
-        .frame(minWidth: 600, idealWidth: 800, maxWidth: .infinity, minHeight: 300, idealHeight: 400, maxHeight: .infinity)
+        .frame(minWidth: 1200, idealWidth: 1200, maxWidth: .infinity, minHeight: 580, idealHeight: 580, maxHeight: .infinity)
     }
 }
 
@@ -104,7 +104,8 @@ struct RecommendationsPopupView: View {
                     }
                     .padding(.bottom, 8)
                     .padding(.horizontal, 8)
-                }.padding(.top,10)
+                }.padding(.top,15)
+//                    .padding(.bottom,10)
 
                 
                 Button(action: {
@@ -115,30 +116,23 @@ struct RecommendationsPopupView: View {
                 }, label: {
                     Text("Close")
                         .foregroundColor(.black)
-                        .padding(.vertical, 8)
+//                        .padding(.vertical, 8)
                         .padding(.horizontal, 20)
                         .background(Color .clear)
                         .cornerRadius(10)
                 })
                 .background(Color.white)
                 .cornerRadius(25)
-                .padding(.bottom)
+                .padding(.bottom,10)
             }
             .padding(.leading,40)
-            .frame(width: 1020, height: 500)
-            .background(Color(red: 255/255, green: 255/255, blue: 255/255).opacity(0.35)) // Added background color for the content area
-//            .cornerRadius(20)
+            .frame(minWidth: 1200, idealWidth:1200, maxWidth: 1200, minHeight: 580, idealHeight: 580, maxHeight: 580)
+            .background(Color(red: 255/255, green: 255/255, blue: 255/255).opacity(0.35)) // Added
             .shadow(radius: 5)
-//            .position(x: buttonFrame.midX, y: buttonFrame.minY - 220)
+
         }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SuggestionsView()
-//    }
-//}
 
 struct Recommendation: Identifiable {
     var id = UUID()
