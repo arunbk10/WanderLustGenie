@@ -11,16 +11,15 @@ import SwiftUI
 struct WanderlustApp: App {
     
     @State private var viewModel = ChatViewModel()
+    @State private var chatViewmodel = ViewModel()
     
     var body: some Scene {
-        WindowGroup {
-            ConversationView()           
-        }.windowStyle(.plain)
-            .defaultSize(width: 0.80, height: 0.75, depth: 1.0, in: .meters)
-                .windowStyle(.plain)
-
-        ImmersiveSpace(id: "Chatbot") {
-            ImmersiveView().environment(viewModel)
-        }
+        LaunchWindow()
+        WindowGroup(id: "MapViewView"){
+            MapView()
+        }.windowStyle(.plain).defaultSize(width: 1, height: 0.8, depth: 0.0, in: .meters)
+        
     }
 }
+
+

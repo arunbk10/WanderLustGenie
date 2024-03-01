@@ -10,6 +10,7 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
+    @State private var chatViewModel = ViewModel()
 
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
@@ -21,6 +22,7 @@ struct ContentView: View {
         VStack(alignment: .leading, content: {
             Text("Welcome to Wanderlust")
                 .font(.extraLargeTitle2)
+            
         })
         .padding(50)
         .glassBackgroundEffect()

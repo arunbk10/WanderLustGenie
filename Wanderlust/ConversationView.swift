@@ -9,9 +9,12 @@ import SwiftUI
 import SiriWaveView
 import AVFoundation
 struct ConversationView: View {
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
     let synthesizer = AVSpeechSynthesizer()
     @State var vm = ViewModel()
     @State var isSymbolAnimating = false
+    @State var isMapButtonShow = false
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -46,6 +49,15 @@ struct ConversationView: View {
                 }
             }
             startCaptureButton
+            
+            if isMapButtonShow {
+                Button("Go") {
+                           dismissWindow(id: "ConverseView")
+                        openWindow(id: "MapViewView")
+                }
+                   
+                
+            }
         }.onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
@@ -54,6 +66,12 @@ struct ConversationView: View {
                 utterance.volume = 0.9
                 utterance.voice = AVSpeechSynthesisVoice(language: "en-au")
                 synthesizer.speak(utterance)
+            }
+        }
+        .onChange(of: vm.currentIndex) { newValue in
+            if newValue >= Constants.botresponse.count {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                    isMapButtonShow = true                }
             }
         }
     }

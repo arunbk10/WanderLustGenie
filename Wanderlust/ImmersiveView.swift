@@ -12,6 +12,7 @@ import Combine
 import MapKit
 
 struct ImmersiveView: View {
+    @State private var chatViewModel = ViewModel()
     static var textureRequest: AnyCancellable?
     static var contentEntity = Entity()
 
@@ -47,6 +48,8 @@ struct ImmersiveView: View {
         RealityView { content, attachments in
             do
             {
+//
+                
                 // Add bot to the view
                 let bot = try await Entity(named: "Chatbot", in: realityKitContentBundle)
                 chatbotEntity.addChild(bot)
