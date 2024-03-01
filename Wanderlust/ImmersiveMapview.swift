@@ -1,5 +1,5 @@
 //
-//  MapView.swift
+//  ImmersiveMapview.swift
 //  Wanderlust
 //
 //  Created by Kishor L D on 01/03/24.
@@ -12,7 +12,7 @@ import RealityKitContent
 import Combine
 import MapKit
 
-struct MapView: View {
+struct ImmersiveMapview: View {
 
     @State var planeEntity: Entity = {
         let wallAnchor = AnchorEntity(.plane(.vertical, classification: .wall, minimumBounds: SIMD2<Float>(0.008, 0.008)))
@@ -31,7 +31,7 @@ struct MapView: View {
             {
                 guard let transform = attachments.entity(for: "mapWindow") else { return }
                 let flip = 270 * Float.pi / 180
-                MapView.rotateEntityAroundYAxis(entity: transform, angle: flip)
+//                MapView.rotateEntityAroundYAxis(entity: transform, angle: flip)
                 planeEntity.addChild(transform)
 
             }
@@ -43,13 +43,12 @@ struct MapView: View {
         } attachments: {
             
             Attachment(id: "mapWindow") {
-//                MapView()
             }
         }
     }
 }
 
 #Preview {
-    MapView()
+    ImmersiveMapview()
         .previewLayout(.sizeThatFits)
 }
