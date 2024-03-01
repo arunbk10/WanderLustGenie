@@ -51,10 +51,16 @@ struct ConversationView: View {
             startCaptureButton
             
             if isMapButtonShow {
-                Button("Go") {
+                Button("Locate on Map") {
                            dismissWindow(id: "ConverseView")
-                        openWindow(id: "MapViewView")
-                }
+                        openWindow(id: "MapView")
+                }.padding(20)
+                    
+                    .frame(width: 300, height: 80)
+                    .background(.purple).opacity(0.7)
+                    .font(.largeTitle)
+                    .cornerRadius(30)//                    .buttonStyle(PlainButtonStyle())
+                    
                    
                 
             }
@@ -70,7 +76,7 @@ struct ConversationView: View {
         }
         .onChange(of: vm.currentIndex) { newValue in
             if newValue >= Constants.botresponse.count {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
                     isMapButtonShow = true                }
             }
         }

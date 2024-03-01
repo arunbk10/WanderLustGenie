@@ -13,6 +13,6 @@ struct LaunchWindow: Scene {
     var body: some Scene {
         WindowGroup(id: "ConverseView") {
             ConversationView()
-        }.windowStyle(.plain).defaultSize(width: 0.7, height: 0.7, depth: -0.15, in: .meters)
+        }.windowStyle(.plain).defaultSize(width: 0.80, height:0.75, depth: 1, in: .meters)
     }
 }

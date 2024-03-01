@@ -15,7 +15,7 @@ struct WanderlustApp: App {
     
     var body: some Scene {
         LaunchWindow()
-        WindowGroup(id: "MapViewView"){
+        WindowGroup(id: "MapView"){
             MapView()
         }.windowStyle(.plain).defaultSize(width: 1, height: 0.8, depth: 0.0, in: .meters)
         

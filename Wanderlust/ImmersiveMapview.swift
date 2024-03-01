@@ -43,6 +43,7 @@ struct ImmersiveMapview: View {
         } attachments: {
             
             Attachment(id: "mapWindow") {
+                MapView()
             }
         }
     }

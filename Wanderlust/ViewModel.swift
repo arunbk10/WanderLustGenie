@@ -16,7 +16,7 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
      var currentIndex = 0
    
     
-    let client = OpenAIClient(apiKey: "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")
+    let client = OpenAIClient(apiKey: "")
     var audioPlayer: AVAudioPlayer!
     var audioRecorder: AVAudioRecorder!
     let voiceType: VoiceType = .alloy
