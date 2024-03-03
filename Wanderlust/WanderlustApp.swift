@@ -11,18 +11,17 @@ import SwiftUI
 struct WanderlustApp: App {
     @State private var hotelViewModel = HotelViewModel()
     @State private var hotelPlayerViewModel = HotelPlayerViewModel()
-    @State private var viewModel = ChatViewModel()
     @State private var chatViewmodel = ViewModel()
     
     var body: some Scene {
         WindowGroup(id: "ConverseView") {
             ConversationView(hotelViewModel: hotelViewModel)
-        }.windowStyle(.plain).defaultSize(width: 0.80, height:0.75, depth: 1, in: .meters)
+        }.windowStyle(.plain).defaultSize(width: 0.85, height:0.9, depth: 1, in: .meters)
         WindowGroup(id: "HotelListView") {
             HotelListView(viewModel: hotelViewModel)
                 .cornerRadius(16)
         }.windowStyle(.plain)
-            .defaultSize(width: 1.6, height: 0.5, depth: 1, in: .meters)
+            .defaultSize(width: 1.45, height: 0.45, depth: 1, in: .meters)
         
         ImmersiveSpace(id: "ImmersiveSpace") {
             HotelistImmersiveView(viewModel: hotelViewModel)
@@ -31,7 +30,7 @@ struct WanderlustApp: App {
             HotelImmersiveView(viewModel: hotelPlayerViewModel)
         }.immersionStyle(selection: .constant(.full), in: .full)
         ImmersiveSpace(id: "RoomTour") {
-            ImmersiveView().environment(viewModel)
+            ImmersiveView(viewModel: hotelViewModel)
         }.immersionStyle(selection: .constant(.full), in: .full)
     }
 }

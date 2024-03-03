@@ -10,14 +10,13 @@
 
 def Xform "Root"
 {
-    def "ImageToStl_com_room" (
+    def "Living_Room_II__1_" (
         active = true
-        prepend references = @ImageToStl.com_room.usdc@
+        prepend references = @Living_Room_II (1).usdz@
     )
     {
-        quatf xformOp:orient = (0.7061803, 0.036185294, -0.036185298, 0.7061803)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (-0.005246457, 0, 0.027191818)
+        float3 xformOp:scale = (0.01, 0.01, 0.01)
+        float3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
     }
 }

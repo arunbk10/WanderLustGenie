@@ -21,6 +21,11 @@ struct ConversationView: View {
     
     var body: some View {
         NavigationStack {
+            NavigationLink {
+                MapView(hotelViewModel: hotelViewModel)
+            } label: {
+                Text("goto..").opacity(isConvoCompleted ? 1 : 0).labelsHidden()
+            }
             ZStack(alignment: .bottomTrailing) {
                 VStack {
                     ScrollView {
@@ -51,13 +56,8 @@ struct ConversationView: View {
                             .frame(height: 256)
                             .overlay { overlayView }
                     }
-                    NavigationLink {
-                        MapView(hotelViewModel: hotelViewModel)
-                    } label: {
-                        Text("goto..").opacity(isConvoCompleted ? 1 : 0).labelsHidden()
-                    }
+                    startCaptureButton
                 }
-                startCaptureButton
             }.onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
@@ -73,12 +73,10 @@ struct ConversationView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         isMapButtonShow = true
                         isConvoCompleted = true
-//                        dismissWindow(id: "ConverseView")
-//                        openWindow(id: "MapView")
                     }
                 }
-            }
-        }.padding(15)
+            }.padding(15)
+        }
     }
     
     
@@ -92,7 +90,7 @@ struct ConversationView: View {
         case .processingSpeech:
             Image(systemName: "brain")
                 .symbolEffect(.bounce.up.byLayer, options: .repeating, value: isSymbolAnimating)
-                .font(.system(size: 128))
+                .font(.system(size: 90))
                 .onAppear { isSymbolAnimating = true }
                 .onDisappear { isSymbolAnimating = false }
         default: EmptyView()
@@ -111,15 +109,16 @@ struct ConversationView: View {
             if vm.state == .recordingSpeech {
                 Image("Siri")
                     .symbolRenderingMode(.multicolor)
-                    .font(.system(size: 44))
+                    .font(.system(size: 30))
             } else {
                 Image("Siri")
                     .symbolRenderingMode(.multicolor)
-                    .font(.system(size: 128))
+                    .font(.system(size: 100))
                 
             }
         }
-        .buttonStyle(.borderless)
+        .buttonStyle(.plain)
+        .frame(width: 30, height: 30)
     }
 }
 

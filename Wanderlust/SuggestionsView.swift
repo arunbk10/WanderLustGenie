@@ -7,130 +7,71 @@
 import SwiftUI
 
 struct SuggestionsView: View {
-    @State private var isShowingPopup = false
+    var isShowingPopup = false
     @State private var buttonFrame: CGRect = .zero
     @State private var isButtonVisible = true
 
     var body: some View {
-        ZStack {
-            VStack {
-                Spacer()
-                
-                if isButtonVisible {
-                    Button(action: {
-                        withAnimation {
-                            isShowingPopup.toggle()
-                        }
-                        isButtonVisible = false
-                    }, label: {
-                        Text("See Recommendations")
-                            .foregroundColor(.black)
-                            .background(Color.clear)
-                            .padding()
-                            
-                            .shadow(color: .gray, radius: 3, x: 2, y: 2)
-                    })
-                    .background(Color.white)
-                    .cornerRadius(25)
-                    .padding()
-
-                }
-
-                Spacer()
-            }
-
-            if isShowingPopup {
-                RecommendationsPopupView(buttonFrame: buttonFrame, isShowingPopup: $isShowingPopup, isButtonVisible: $isButtonVisible)
-                    .transition(.move(edge: .leading)) // Add transition for smoother appearance
-            }
-        }
-        .frame(minWidth: 1200, idealWidth: 1200, maxWidth: .infinity, minHeight: 580, idealHeight: 580, maxHeight: .infinity)
+        RecommendationsPopupView(buttonFrame: buttonFrame, isShowingPopup: isShowingPopup)
     }
 }
 
 struct RecommendationsPopupView: View {
     var buttonFrame: CGRect
-    @Binding var isShowingPopup: Bool
-    @Binding var isButtonVisible: Bool
+    var isShowingPopup: Bool
 
     var body: some View {
-        ZStack {
-            Color.clear // Set the background color to clear
-            
-            VStack {
-                Text("📍Discovering Surroundings: Peninsula Hotel's Nearby Attractions")
-                    .padding(.leading,20)
-                    .padding(.trailing,20)
-                    .padding(.top,10)
-                    .padding(.bottom,10)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black).opacity(0.9)
-//                    .background(Color(.black).opacity(0.35))
-//                    .cornerRadius(15)
-
-                ScrollView(.horizontal, showsIndicators: true) {
-                    HStack(spacing: 20) {
-                        ForEach(recommendations) { recommendation in
-                            VStack {
-                                Image(recommendation.imageName)
-                                    .resizable()
-                                    .frame(width: 200, height: 150)
-                                    .cornerRadius(30)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 30)
-                                            .inset(by: 0.1)
-                                            .stroke(.white, lineWidth: 1)
-                                    )
-                                    
-
-                                Text(recommendation.title)
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.center)
-                                   
-
-                                Text(recommendation.description)
-                                    .font(.subheadline)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.black)
-                                    .multilineTextAlignment(.center)
-                                    .frame(width: 200, height: 100, alignment: .center)
-                                 
-                            }
-                           
-                        }
-                    }
-                    .padding(.bottom, 8)
-                    .padding(.horizontal, 8)
-                }.padding(.top,15)
-//                    .padding(.bottom,10)
-
-                
-                Button(action: {
-                    withAnimation {
-                        isShowingPopup.toggle()
-                    }
-                    isButtonVisible = true
-                }, label: {
-                    Text("Close")
-                        .foregroundColor(.black)
-//                        .padding(.vertical, 8)
-                        .padding(.horizontal, 20)
-                        .background(Color .clear)
-                        .cornerRadius(10)
-                })
-                .background(Color.white)
-                .cornerRadius(25)
+        VStack {
+            Text("📍Discovering Surroundings: Peninsula Hotel's Nearby Attractions")
+                .padding(.leading,20)
+                .padding(.trailing,20)
+                .padding(.top,10)
                 .padding(.bottom,10)
-            }
-            .padding(.leading,40)
-            .frame(minWidth: 1200, idealWidth:1200, maxWidth: 1200, minHeight: 580, idealHeight: 580, maxHeight: 580)
-            .background(Color(red: 255/255, green: 255/255, blue: 255/255).opacity(0.35)) // Added
-            .shadow(radius: 5)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(.white).opacity(0.9)
 
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack(spacing: 20) {
+                    ForEach(recommendations) { recommendation in
+                        VStack {
+                            Image(recommendation.imageName)
+                                .resizable()
+                                .frame(width: 200, height: 150)
+                                .cornerRadius(30)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .inset(by: 0.1)
+                                        .stroke(.white, lineWidth: 1)
+                                )
+                                
+
+                            Text(recommendation.title)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                               
+
+                            Text(recommendation.description)
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 200, height: 100, alignment: .center)
+                             
+                        }
+                       
+                    }
+                }
+                .padding(.bottom, 8)
+                .padding(.horizontal, 8)
+            }.padding(.top,15)
+            Spacer()
         }
+        .padding(.leading,40)
+        .frame(minWidth: 1200, idealWidth:1200, maxWidth: 1200, minHeight: 580, idealHeight: 580, maxHeight: 580)
+        .shadow(radius: 5)
     }
 }
 

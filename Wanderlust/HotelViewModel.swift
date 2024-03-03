@@ -18,6 +18,14 @@ class HotelViewModel: ObservableObject {
         PlaceInfo(name: "Conrad New York Downtown", locationCoordinate: CLLocationCoordinate2DMake(25.196566, 55.274462), panoId: "S6xu9oHEBBAkFTUWTqjNiA"),
         PlaceInfo(name: "The Marmara Park Avenue", locationCoordinate: CLLocationCoordinate2DMake(25.196566, 55.274462), panoId: "88m3GIv1SqJw2ZijJcYm9Q"),
     ]
+    
+    var selectedRoom: Room?
+    var rooms: [Room] = [
+        Room(id: 1, title: "Platinum Room", sceneName: "Room1"),
+        Room(id: 2, title: "Delux Room", sceneName: "Room2"),
+        Room(id: 3, title: "Premium Suite", sceneName: "Room3")
+    ]
+
 
     private let width = 4096
     private let height = 2048

@@ -33,6 +33,7 @@ struct HotelListView: View {
             if !showImmersiveSpace {
                 ScrollView(.horizontal) {
                     HStack(spacing: 20) {
+                        Spacer()
                         ForEach(viewModel.placeInfoList, id: \.self) { placeInfo in
                             if let backgroundImageName = backgroundImages[placeInfo.name] {
                                 Button(action: {
@@ -63,37 +64,51 @@ struct HotelListView: View {
                                     }
                                     
                                 }
-                                .buttonStyle(PlainButtonStyle()) // Remove button style
+                                .buttonStyle(.plain) // Remove button style
                             } else {
                                 Text("No background image found for \(placeInfo.name)")
                                     .foregroundColor(.red)
                                     .padding()
                             }
                         }
+                        Spacer()
                     }
-                }
-                .padding(.bottom, 20)
+                }.padding(20)
+                Spacer()
+                Button {
+                    Task {
+                        dismissWindow(id: "HotelListView")
+                        await dismissImmersiveSpace()
+                        openWindow(id: "ConverseView")
+                    }
+
+                   } label: {
+                       Text("Home")
+                           .font(.system(size: 40, weight: Font.Weight.bold))
+                           .padding(.horizontal, 8)
+                           .frame(height: 100)
+                           .cornerRadius(8)
+                   }
+                   .buttonStyle(.borderedProminent)
+                Spacer()
             }
 
-            if showImmersiveSpace { 
-                SuggestionsView()
-                HStack {
+            if showImmersiveSpace {
+                NavigationStack{
+                    NavigationLink {
+                        SuggestionsView(isShowingPopup: true)
+                    } label: {
+                        Text("See Recommendations")
+                    }
+                    .background(Color.white)
+                    .foregroundColor(Color.black)
+                    .cornerRadius(40)
                     
                     Toggle(isOn: $showImmersiveSpace) {
                         Text(showImmersiveSpace ? "Hide ImmersiveSpace" : "Show ImmersiveSpace").padding()
                     }
                     .toggleStyle(.button)
                     .padding()
-                    if isLoading {
-                        ProgressView("Loading...")
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .padding()
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.9) {
-                                    isLoading = false // Dismiss the loading indicator after 5 seconds
-                                }
-                            }
-                    }
                     
                     Button {
                         Task {
@@ -120,13 +135,30 @@ struct HotelListView: View {
                         .foregroundColor(Color.black)
                         .cornerRadius(40)
                         .padding()
-                        
                     
+                    NavigationLink {
+                        RoomOptionsView(viewModel: viewModel)
+                    } label: {
+                        Text("See Room Options")
+                    }
+                    .background(Color.white)
+                    .foregroundColor(Color.black)
+                    .cornerRadius(40)
                     
+                    if isLoading {
+                        ProgressView("Loading...")
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .padding()
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    isLoading = false // Dismiss the loading indicator after 1 seconds
+                                }
+                            }
+                    }
                 }
             }
           
-        }
+        }.glassBackgroundEffect()
         .onChange(of: showImmersiveSpace) { newValue in
             Task {
                 if newValue {
@@ -136,7 +168,6 @@ struct HotelListView: View {
                 }
             }
         }
-        .padding()
     }
 }
 

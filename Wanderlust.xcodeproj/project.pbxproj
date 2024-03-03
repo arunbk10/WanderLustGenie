@@ -24,6 +24,7 @@
 		D8C25BD62B8C95CF009B96C0 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C25BD52B8C95CF009B96C0 /* MessageView.swift */; };
 		D8C25BD82B8C963F009B96C0 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C25BD72B8C963F009B96C0 /* Models.swift */; };
 		D8E003182B91E388000600F1 /* ImmersiveMapview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E003172B91E388000600F1 /* ImmersiveMapview.swift */; };
+		FC51FA712B94E14700783F8B /* RoomOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51FA702B94E14700783F8B /* RoomOptionsView.swift */; };
 		FC96DCE62B87597C004F7D42 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = FC96DCE52B87597C004F7D42 /* RealityKitContent */; };
 		FC96DCE82B87597C004F7D42 /* WanderlustApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DCE72B87597C004F7D42 /* WanderlustApp.swift */; };
 		FC96DCEA2B87597C004F7D42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC96DCE92B87597C004F7D42 /* ContentView.swift */; };
@@ -50,6 +51,7 @@
 		D8C25BD52B8C95CF009B96C0 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		D8C25BD72B8C963F009B96C0 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		D8E003172B91E388000600F1 /* ImmersiveMapview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveMapview.swift; sourceTree = "<group>"; };
+		FC51FA702B94E14700783F8B /* RoomOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomOptionsView.swift; sourceTree = "<group>"; };
 		FC96DCE02B87597C004F7D42 /* Wanderlust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wanderlust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC96DCE42B87597C004F7D42 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		FC96DCE72B87597C004F7D42 /* WanderlustApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WanderlustApp.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				03999BD02B920B17003520F4 /* HotelRoomView.swift */,
 				03999BD22B920B17003520F4 /* HotelViewModel.swift */,
 				03999BCF2B920B17003520F4 /* SuggestionsView.swift */,
+				FC51FA702B94E14700783F8B /* RoomOptionsView.swift */,
 				FC96DCED2B87597D004F7D42 /* Assets.xcassets */,
 				FC96DCF22B87597D004F7D42 /* Info.plist */,
 				FC96DCEF2B87597D004F7D42 /* Preview Content */,
@@ -233,6 +236,7 @@
 				FC96DCE82B87597C004F7D42 /* WanderlustApp.swift in Sources */,
 				03999BD52B920B17003520F4 /* SuggestionsView.swift in Sources */,
 				FC96DCFB2B8C863F004F7D42 /* MapView.swift in Sources */,
+				FC51FA712B94E14700783F8B /* RoomOptionsView.swift in Sources */,
 				FC96DCF92B875BA3004F7D42 /* ChatViewModel.swift in Sources */,
 				D8C25BD82B8C963F009B96C0 /* Models.swift in Sources */,
 				FC96DCEC2B87597C004F7D42 /* ImmersiveView.swift in Sources */,

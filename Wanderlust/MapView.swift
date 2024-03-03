@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import RealityKit
 
 struct LocationObj: Identifiable, Equatable {
     var id: Int
@@ -23,8 +24,41 @@ struct LocationObj: Identifiable, Equatable {
     }
 }
 
+struct MapRealityView: View {
+    @StateObject var hotelViewModel: HotelViewModel
+
+    // Plane for map
+    @State var planeEntity: Entity = {
+        let wallAnchor = AnchorEntity(.plane(.horizontal, classification: .table, minimumBounds: SIMD2<Float>(0.008, 0.008)))
+        
+        return wallAnchor
+    }()
+
+    var body: some View {
+        RealityView { content, attachments in
+            do
+            {
+                guard let transform = attachments.entity(for: "mapWindow") else { return }
+                //                let flip = 270 * Float.pi / 180
+                //                ImmersiveView.rotateEntityAroundXAxis(entity: transform, angle: flip)
+                planeEntity.addChild(transform)
+                content.add(planeEntity)
+            }
+            catch
+            {
+                print("error in reality view:\(error)")
+            }
+        } update: { _, _ in
+        } attachments: {
+            Attachment(id: "mapWindow") {
+                MapView(hotelViewModel: HotelViewModel())
+            }
+        }
+    }
+}
+
 struct MapView: View {
-    var hotelViewModel: HotelViewModel
+    @StateObject var hotelViewModel: HotelViewModel
 
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
@@ -40,41 +74,44 @@ struct MapView: View {
                                     LocationObj(id: 3, name: "The Marmara Park Avenue", coordinate: .marmara, panoID: "88m3GIv1SqJw2ZijJcYm9Q"),
                                     LocationObj(id: 4, name: "Gansevoort Meatpacking", coordinate: .groosevelt, panoID: "clMbijYx6gcAAAQfCNrp5A") ]
     var body: some View {
-        VStack {
-            Map(selection: $selectedTag)
-            {
-                ForEach(locations) { location in
-                    Annotation(location.name, coordinate: location.coordinate) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.teal)
-                            Button("🏨") {
-                                selectedTag = location.id
-                            }.padding(5)
+        NavigationStack {
+            
+            VStack {
+                Map(selection: $selectedTag)
+                {
+                    ForEach(locations) { location in
+                        Annotation(location.name, coordinate: location.coordinate) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(Color.teal)
+                                Button("🏨") {
+                                    selectedTag = location.id
+                                }.padding(5)
+                            }
                         }
                     }
-                }
-                
-            }.onChange(of: selectedTag) {
-                Task
-                {
-                    let selectedPlace = locations.first { obj in
-                        obj.id == selectedTag
-                    }
-                    if let place = selectedPlace
+                    
+                }.onChange(of: selectedTag) {
+                    Task
                     {
-                        hotelViewModel.selectedPlaceInfo = PlaceInfo(name: place.name, locationCoordinate: place.coordinate , panoId: place.panoID)
-                        await openImmersiveSpace(id: "ImmersiveSpace")
-
-                        openWindow(id: "HotelListView")
-                        dismissWindow(id: "ConverseView")
+                        let selectedPlace = locations.first { obj in
+                            obj.id == selectedTag
+                        }
+                        if let place = selectedPlace
+                        {
+                            hotelViewModel.selectedPlaceInfo = PlaceInfo(name: place.name, locationCoordinate: place.coordinate , panoId: place.panoID)
+                            await openImmersiveSpace(id: "ImmersiveSpace")
+                            
+                            openWindow(id: "HotelListView")
+                            dismissWindow(id: "ConverseView")
+                        }
                     }
+                    
                 }
-
-            }
-            Spacer()
-        }.padding(10)
-            .glassBackgroundEffect()
+                Spacer()
+            }.padding(10)
+                .glassBackgroundEffect()
+        }
     }
 }
 
