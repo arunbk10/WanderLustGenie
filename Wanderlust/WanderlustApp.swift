@@ -15,10 +15,9 @@ struct WanderlustApp: App {
     @State private var chatViewmodel = ViewModel()
     
     var body: some Scene {
-        LaunchWindow()
-        WindowGroup(id: "MapView"){
-            MapView()
-        }.windowStyle(.plain).defaultSize(width: 1.5, height: 1.5, depth: 1.0, in: .meters)
+        WindowGroup(id: "ConverseView") {
+            ConversationView(hotelViewModel: hotelViewModel)
+        }.windowStyle(.plain).defaultSize(width: 0.80, height:0.75, depth: 1, in: .meters)
         WindowGroup(id: "HotelListView") {
             HotelListView(viewModel: hotelViewModel)
                 .cornerRadius(16)
@@ -30,6 +29,9 @@ struct WanderlustApp: App {
         }.immersionStyle(selection: .constant(.full), in: .full)
         ImmersiveSpace(id: "HotelImmersiveSpace") {
             HotelImmersiveView(viewModel: hotelPlayerViewModel)
+        }.immersionStyle(selection: .constant(.full), in: .full)
+        ImmersiveSpace(id: "RoomTour") {
+            ImmersiveView().environment(viewModel)
         }.immersionStyle(selection: .constant(.full), in: .full)
     }
 }

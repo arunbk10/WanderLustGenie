@@ -90,7 +90,7 @@ struct ImmersiveView: View {
             }
             
             Attachment(id: "mapWindow") {
-                MapView()
+                MapView(hotelViewModel: HotelViewModel())
             }
         }
         .gesture(SpatialTapGesture().targetedToAnyEntity().onEnded {

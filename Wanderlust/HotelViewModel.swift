@@ -14,8 +14,8 @@ class HotelViewModel: ObservableObject {
     var selectedPlaceInfo: PlaceInfo?
     var placeInfoList: [PlaceInfo] = [
         PlaceInfo(name: "The Peninsula  New York", locationCoordinate: CLLocationCoordinate2DMake(40.758896, -73.985130), panoId: "SIJGWvltPjixy4IzjC0FUA"),
-        PlaceInfo(name: "Conrad New York Downtown", locationCoordinate: CLLocationCoordinate2DMake(48.858093, 2.294694), panoId: "clMbijYx6gcAAAQfCNrp5A"),
-        PlaceInfo(name: "Gansevoort Meatpacking", locationCoordinate: CLLocationCoordinate2DMake(25.196566, 55.274462), panoId: "S6xu9oHEBBAkFTUWTqjNiA"),
+        PlaceInfo(name: "Gansevoort Meatpacking", locationCoordinate: CLLocationCoordinate2DMake(48.858093, 2.294694), panoId: "clMbijYx6gcAAAQfCNrp5A"),
+        PlaceInfo(name: "Conrad New York Downtown", locationCoordinate: CLLocationCoordinate2DMake(25.196566, 55.274462), panoId: "S6xu9oHEBBAkFTUWTqjNiA"),
         PlaceInfo(name: "The Marmara Park Avenue", locationCoordinate: CLLocationCoordinate2DMake(25.196566, 55.274462), panoId: "88m3GIv1SqJw2ZijJcYm9Q"),
     ]
 

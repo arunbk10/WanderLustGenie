@@ -14,6 +14,9 @@ struct HotelListView: View {
     @State private var buttonTitle = "Navigate to HotelRoom"
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
+
     @State var isLoading = true
 
     // Dictionary to map place names to background images

@@ -9,65 +9,76 @@ import SwiftUI
 import SiriWaveView
 import AVFoundation
 struct ConversationView: View {
+    @StateObject var hotelViewModel: HotelViewModel
+
     @Environment(\.openWindow) private var openWindow
     @Environment(\.dismissWindow) private var dismissWindow
     let synthesizer = AVSpeechSynthesizer()
     @State var vm = ViewModel()
     @State var isSymbolAnimating = false
     @State var isMapButtonShow = false
+    @State var isConvoCompleted = false
     
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            VStack {
-                ScrollView {
-                    ForEach(Constants.messages) { message in
-                        VStack() {
-                            if message.isUser {
-                                HStack {
-                                    Spacer()
-                                    MessageView(message: message)
-                                        .frame(width: 621)
-                                }.padding(.bottom, 30)
-                            } else {
-                                HStack {
-                                    MessageView(message: message)
-                                        .frame(width: 621)
-                                    Spacer()
-                                }.padding(.bottom, 30)
+        NavigationStack {
+            ZStack(alignment: .bottomTrailing) {
+                VStack {
+                    ScrollView {
+                        ForEach(Constants.messages) { message in
+                            VStack() {
+                                if message.isUser {
+                                    HStack {
+                                        Spacer()
+                                        MessageView(message: message)
+                                            .frame(width: 621)
+                                    }.padding(.bottom, 30)
+                                } else {
+                                    HStack {
+                                        MessageView(message: message)
+                                            .frame(width: 621)
+                                        Spacer()
+                                    }.padding(.bottom, 30)
+                                }
                             }
                         }
+                    }.frame(height: 700)
+                        .padding(.bottom, 20)
+                       
+                    VStack(alignment: .trailing, spacing: 10) {
+                        SiriWaveView()
+                            .power(power: vm.audioPower)
+                            .opacity(vm.siriWaveFormOpacity)
+                            .frame(height: 256)
+                            .overlay { overlayView }
                     }
-                }.frame(height: 700)
-                    .padding(.bottom, 20)
-                   
-                VStack(alignment: .trailing, spacing: 10) {
-                    SiriWaveView()
-                        .power(power: vm.audioPower)
-                        .opacity(vm.siriWaveFormOpacity)
-                        .frame(height: 256)
-                        .overlay { overlayView }
+                    NavigationLink {
+                        MapView(hotelViewModel: hotelViewModel)
+                    } label: {
+                        Text("goto..").opacity(isConvoCompleted ? 1 : 0).labelsHidden()
+                    }
+                }
+                startCaptureButton
+            }.onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
+                    
+                    utterance.rate = 0.4
+                    utterance.volume = 0.9
+                    utterance.voice = AVSpeechSynthesisVoice(language: "en-au")
+                    synthesizer.speak(utterance)
                 }
             }
-            startCaptureButton
-            
-        }.onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
-                
-                utterance.rate = 0.4
-                utterance.volume = 0.9
-                utterance.voice = AVSpeechSynthesisVoice(language: "en-au")
-                synthesizer.speak(utterance)
+            .onChange(of: vm.currentIndex) { newValue in
+                if newValue >= Constants.botresponse.count {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        isMapButtonShow = true
+                        isConvoCompleted = true
+//                        dismissWindow(id: "ConverseView")
+//                        openWindow(id: "MapView")
+                    }
+                }
             }
-        }
-        .onChange(of: vm.currentIndex) { newValue in
-            if newValue >= Constants.botresponse.count {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) {
-                    isMapButtonShow = true    
-                    dismissWindow(id: "ConverseView")
-                 openWindow(id: "MapView")}
-            }
-        }
+        }.padding(15)
     }
     
     
@@ -112,35 +123,7 @@ struct ConversationView: View {
     }
 }
 
-#Preview("Idle") {
-    ContentView()
-}
 
-#Preview("Recording Speech") {
-    let vm = ViewModel()
-    vm.state = .recordingSpeech
-    vm.audioPower = 0.2
-    return ConversationView(vm: vm)
-}
-
-#Preview("Processing Speech") {
-    let vm = ViewModel()
-    vm.state = .processingSpeech
-    return ConversationView(vm: vm)
-}
-
-#Preview("Playing Speech") {
-    let vm = ViewModel()
-    vm.state = .playingSpeech
-    vm.audioPower = 0.3
-    return ConversationView(vm: vm)
-}
-
-#Preview("Error") {
-    let vm = ViewModel()
-    vm.state = .error("An error has occured")
-    return ConversationView(vm: vm)
-}
 
 
 
