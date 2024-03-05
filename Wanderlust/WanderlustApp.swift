@@ -12,8 +12,10 @@ struct WanderlustApp: App {
     @State private var hotelViewModel = HotelViewModel()
     @State private var hotelPlayerViewModel = HotelPlayerViewModel()
     @State private var chatViewmodel = ViewModel()
+    @State private var player = SpatialPlayerModel()
     
     var body: some Scene {
+            
         WindowGroup(id: "ConverseView") {
             ConversationView(hotelViewModel: hotelViewModel)
         }.windowStyle(.plain).defaultSize(width: 0.85, height:0.9, depth: 1, in: .meters)
@@ -32,6 +34,10 @@ struct WanderlustApp: App {
         ImmersiveSpace(id: "RoomTour") {
             ImmersiveView(viewModel: hotelViewModel)
         }.immersionStyle(selection: .constant(.full), in: .full)
+        WindowGroup(id: "SpatialVideo") {
+            SpatialContentView()
+                .environment(player)
+        }
     }
 }
 

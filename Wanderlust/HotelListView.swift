@@ -116,7 +116,8 @@ struct HotelListView: View {
                             if buttonTitle == "Navigate to HotelRoom" {
                                 // Perform task for the initial title
                                 await dismissImmersiveSpace()
-                                await openImmersiveSpace(id: "HotelImmersiveSpace")
+//                                await openImmersiveSpace(id: "HotelImmersiveSpace")
+                                openWindow(id: "SpatialVideo")
                             } else if buttonTitle == "Navigate to StreetView" {
                                 // Perform task for the new title
                                 await dismissImmersiveSpace()
