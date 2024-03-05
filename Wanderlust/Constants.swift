@@ -25,5 +25,11 @@ struct Constants {
     static var messages: [ChatMessage] = [.init(id: UUID(), text: "Hi there! How can I assist you today? ", isUser: false)]
   static var demoResponses : [String] = ["Hi there! I'm so excited to be in New York for the first time! Can you recommend some must-visit places?","Definitely iconic landmarks! Where should I start?","That sounds fantastic! By the way, do you have any recommendations for a good hotel around Times Square?","I want something centrally located with easy access to Times Square and the other attractions in NYC.","Yes, that will be great. Can I also view the hotel rooms?","Thanks a bunch! Let's get started."]
     static var ErrorMessage = "it seems I'm unable to provide information on that specific query. Please feel free to ask another question"
+    
+//    static var apikey = ProcessInfo.processInfo.environment["Apikey"]
+}
+
+struct Config {
+    static let apiKey = "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"
 }
 
