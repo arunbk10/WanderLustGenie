@@ -21,11 +21,7 @@ struct ConversationView: View {
     
     var body: some View {
         NavigationStack {
-            NavigationLink {
-                MapView(hotelViewModel: hotelViewModel)
-            } label: {
-                Text("goto..").opacity(isConvoCompleted ? 1 : 0).labelsHidden()
-            }
+            
             ZStack(alignment: .bottomTrailing) {
                 VStack {
                     ScrollView {
@@ -55,6 +51,11 @@ struct ConversationView: View {
                             .opacity(vm.siriWaveFormOpacity)
                             .frame(height: 256)
                             .overlay { overlayView }
+                        NavigationLink {
+                            MapView(hotelViewModel: hotelViewModel)
+                        } label: {
+                            Text("Skip")
+                        }.frame(width: 100)
                     }
                     startCaptureButton
                 }

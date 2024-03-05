@@ -68,7 +68,7 @@ struct MapView: View {
 
     let startPosition = MapCameraPosition.region(MKCoordinateRegion(center: .groosevelt,span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)))
     @State private var selectedTag: Int?
-    @State private var selectedPlace: LocationObj?
+    @State private var selectedLocation: LocationObj?
     @State private var locations = [LocationObj(id: 1, name: "The Peninsula  New York", coordinate: .penensulaNewYork, panoID:  "SIJGWvltPjixy4IzjC0FUA"),
                                     LocationObj(id: 2, name: "Conrad New York Downtown", coordinate: .conardNewYork, panoID: "S6xu9oHEBBAkFTUWTqjNiA"),
                                     LocationObj(id: 3, name: "The Marmara Park Avenue", coordinate: .marmara, panoID: "88m3GIv1SqJw2ZijJcYm9Q"),
@@ -80,11 +80,11 @@ struct MapView: View {
                 Map(selection: $selectedTag)
                 {
                     ForEach(locations) { location in
-                        Annotation(location.name, coordinate: location.coordinate) {
+                        Annotation("", coordinate: location.coordinate) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color.teal)
-                                Button("🏨") {
+                                Button(location.name) {
                                     selectedTag = location.id
                                 }.padding(5)
                             }
@@ -92,25 +92,21 @@ struct MapView: View {
                     }
                     
                 }.onChange(of: selectedTag) {
-                    Task
+                    let selectedPlace = locations.first { obj in
+                        obj.id == selectedTag
+                    }
+                    if let place = selectedPlace
                     {
-                        let selectedPlace = locations.first { obj in
-                            obj.id == selectedTag
-                        }
-                        if let place = selectedPlace
-                        {
-                            hotelViewModel.selectedPlaceInfo = PlaceInfo(name: place.name, locationCoordinate: place.coordinate , panoId: place.panoID)
-                            await openImmersiveSpace(id: "ImmersiveSpace")
-                            
-                            openWindow(id: "HotelListView")
-                            dismissWindow(id: "ConverseView")
-                        }
+                        selectedLocation = place
+                        hotelViewModel.selectedPlaceInfo = PlaceInfo(name: place.name, locationCoordinate: place.coordinate , panoId: place.panoID)
                     }
                     
                 }
                 Spacer()
             }.padding(10)
                 .glassBackgroundEffect()
+        }.navigationDestination(item: $selectedTag) { room in
+            HotelListView(viewModel: hotelViewModel)
         }
     }
 }
