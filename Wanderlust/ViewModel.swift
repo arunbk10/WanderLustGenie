@@ -14,9 +14,9 @@ import XCAOpenAIClient
 class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
      var currentIndex = 0
-   
     
-    let client = OpenAIClient(apiKey: "")
+    
+    let client = OpenAIClient(apiKey: Config.apiKey)
     var audioPlayer: AVAudioPlayer!
     var audioRecorder: AVAudioRecorder!
     let voiceType: VoiceType = .alloy
@@ -107,7 +107,7 @@ class ViewModel: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
                     self.prevAudioPower = power
                     return
                 }
-                if let prevAudioPower = self.prevAudioPower, prevAudioPower < 0.25 && power < 0.175 {
+                if let prevAudioPower = self.prevAudioPower, prevAudioPower < 0.75 && power < 0.40 {
                     self.finishCaptureAudio()
                     return
                 }

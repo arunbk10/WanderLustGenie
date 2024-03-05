@@ -125,10 +125,10 @@
 				03999BD22B920B17003520F4 /* HotelViewModel.swift */,
 				03999BCF2B920B17003520F4 /* SuggestionsView.swift */,
 				FC51FA702B94E14700783F8B /* RoomOptionsView.swift */,
+				D838CAC92B90B71D007A7E6B /* Constants.swift */,
 				FC96DCED2B87597D004F7D42 /* Assets.xcassets */,
 				FC96DCF22B87597D004F7D42 /* Info.plist */,
 				FC96DCEF2B87597D004F7D42 /* Preview Content */,
-				D838CAC92B90B71D007A7E6B /* Constants.swift */,
 				D8E003172B91E388000600F1 /* ImmersiveMapview.swift */,
 			);
 			path = Wanderlust;
