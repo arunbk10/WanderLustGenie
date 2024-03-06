@@ -18,73 +18,65 @@ struct ConversationView: View {
     @State var isSymbolAnimating = false
     @State var isMapButtonShow = false
     @State var isConvoCompleted = false
-    @State var isshowChatWindow = true
-  
     
     var body: some View {
-        GeometryReader3D { proxy3D in
-            NavigationStack {
-                NavigationLink {
-                    MapView(hotelViewModel: hotelViewModel)
-                } label: {
-                    Text("goto..").opacity(isConvoCompleted ? 1 : 0).labelsHidden()
-                }
-                ZStack(alignment: .bottomTrailing) {
-                    VStack {
-                        ScrollView {
-                            ForEach(Constants.messages) { message in
-                                VStack() {
-                                    if message.isUser {
-                                        HStack {
-                                            Spacer()
-                                            MessageView(message: message)
-                                                .frame(width: proxy3D.size.width/2)
-                                        }.padding(.bottom, 30)
-                                    } else {
-                                        HStack {
-                                            MessageView(message: message)
-                                                .frame(width: proxy3D.size.width/2)
-                                            Spacer()
-                                        }.padding(.bottom, 30)
-                                    }
+        NavigationStack {
+            
+            ZStack(alignment: .bottomTrailing) {
+                VStack {
+                    ScrollView {
+                        ForEach(Constants.messages) { message in
+                            VStack() {
+                                if message.isUser {
+                                    HStack {
+                                        Spacer()
+                                        MessageView(message: message)
+                                            .frame(width: 621)
+                                    }.padding(.bottom, 30)
+                                } else {
+                                    HStack {
+                                        MessageView(message: message)
+                                            .frame(width: 621)
+                                        Spacer()
+                                    }.padding(.bottom, 30)
                                 }
                             }
-                        }.frame(height: 700)
-                            .padding(.bottom, 20)
-                        
-                        VStack(alignment: .trailing, spacing: 10) {
-                            SiriWaveView()
-                                .power(power: vm.audioPower)
-                                .opacity(vm.siriWaveFormOpacity)
-                                .frame(height: 256)
-                                .overlay { overlayView }
                         }
-                        startCaptureButton
+                    }.frame(height: 700)
+                        .padding(.bottom, 20)
+                       
+                    VStack(alignment: .trailing, spacing: 10) {
+                        SiriWaveView()
+                            .power(power: vm.audioPower)
+                            .opacity(vm.siriWaveFormOpacity)
+                            .frame(height: 256)
+                            .overlay { overlayView }
+                        NavigationLink {
+                            MapView(hotelViewModel: hotelViewModel)
+                        } label: {
+                            Text("Skip")
+                        }.frame(width: 100)
                     }
-                }.onAppear {
-                    if isshowChatWindow {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
-                         
-                            utterance.rate = 0.4
-                            utterance.volume = 0.9
-                            utterance.voice = AVSpeechSynthesisVoice(language: "en-au")
-                            synthesizer.speak(utterance)
-                            isshowChatWindow = false
-                            vm.resetValues()
-                        }
+                    startCaptureButton
+                }
+            }.onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    let utterance = AVSpeechUtterance(string:"Hi there, how can I assist You today?" )
+                    
+                    utterance.rate = 0.4
+                    utterance.volume = 0.9
+                    utterance.voice = AVSpeechSynthesisVoice(language: "en-au")
+                    synthesizer.speak(utterance)
+                }
+            }
+            .onChange(of: vm.currentIndex) { newValue in
+                if newValue >= Constants.botresponse.count {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        isMapButtonShow = true
+                        isConvoCompleted = true
                     }
                 }
-                .onChange(of: vm.currentIndex) { newValue in
-                   
-                    if newValue >= Constants.botresponse.count {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            isMapButtonShow = true
-                            isConvoCompleted = true
-                        }
-                    }
-                }.padding(15)
-            }
+            }.padding(15)
         }
     }
     

@@ -31,7 +31,7 @@ struct HotelListView: View {
     var body: some View {
         VStack {
             if !showImmersiveSpace {
-                ScrollView(.horizontal) {
+                ScrollView(.vertical) {
                     HStack(spacing: 20) {
                         Spacer()
                         ForEach(viewModel.placeInfoList, id: \.self) { placeInfo in
@@ -75,22 +75,6 @@ struct HotelListView: View {
                     }
                 }.padding(20)
                 Spacer()
-                Button {
-                    Task {
-                        dismissWindow(id: "HotelListView")
-                        await dismissImmersiveSpace()
-                        openWindow(id: "ConverseView")
-                    }
-
-                   } label: {
-                       Text("Home")
-                           .font(.system(size: 40, weight: Font.Weight.bold))
-                           .padding(.horizontal, 8)
-                           .frame(height: 100)
-                           .cornerRadius(8)
-                   }
-                   .buttonStyle(.borderedProminent)
-                Spacer()
             }
 
             if showImmersiveSpace {
@@ -100,16 +84,23 @@ struct HotelListView: View {
                     } label: {
                         Text("See Recommendations")
                     }
-                    .background(Color.white)
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.white)
                     .cornerRadius(40)
+                    .hoverEffect()
                     
-                    Toggle(isOn: $showImmersiveSpace) {
-                        Text(showImmersiveSpace ? "Hide ImmersiveSpace" : "Show ImmersiveSpace").padding()
-                    }
-                    .toggleStyle(.button)
-                    .padding()
-                    
+                    Button {
+                        Task {
+                            await dismissImmersiveSpace()
+                            await openImmersiveSpace(id: "ImmersiveSpace")
+                        }
+                    } label: {
+                        Text("Hide Immersive Space").padding(16)
+                    }.buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle
+                        .hoverEffect()
+                        .glassBackgroundEffect()
+                        .foregroundColor(Color.white)
+                        .cornerRadius(40)
+                        .padding()
                     Button {
                         Task {
                             // Perform task based on the current title
@@ -132,8 +123,9 @@ struct HotelListView: View {
                         Text(buttonTitle).padding(16)
                         
                     }.buttonStyle(PlainButtonStyle()) // Use PlainButtonStyle
-                        .background(Color.white)
-                        .foregroundColor(Color.black)
+                        .hoverEffect()
+                        .glassBackgroundEffect()
+                        .foregroundColor(Color.white)
                         .cornerRadius(40)
                         .padding()
                     
@@ -142,8 +134,9 @@ struct HotelListView: View {
                     } label: {
                         Text("See Room Options")
                     }
-                    .background(Color.white)
-                    .foregroundColor(Color.black)
+                    .hoverEffect()
+                    .glassBackgroundEffect()
+                    .foregroundColor(Color.white)
                     .cornerRadius(40)
                     
                     if isLoading {
@@ -159,7 +152,7 @@ struct HotelListView: View {
                 }
             }
           
-        }.glassBackgroundEffect()
+        }
         .onChange(of: showImmersiveSpace) { newValue in
             Task {
                 if newValue {
