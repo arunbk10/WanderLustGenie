@@ -11,8 +11,28 @@
       }
     ]
   },
+  "0EE66E5D-D6A4-4057-9716-51E77740BFAB" : {
+    "objectMetadataList" : [
+      [
+        "0EE66E5D-D6A4-4057-9716-51E77740BFAB",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
   "3B5F2909-9A85-4341-B40E-D01125CAA809" : {
     "objectMetadataList" : [
+      [
+        "3B5F2909-9A85-4341-B40E-D01125CAA809",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
       [
         "3B5F2909-9A85-4341-B40E-D01125CAA809",
         "Root",
@@ -32,9 +52,13 @@
       {
         "isExpanded" : true,
         "isLocked" : false
-      },
+      }
+    ]
+  },
+  "10DFF9D6-E98D-44C0-873D-574A17BDA395" : {
+    "objectMetadataList" : [
       [
-        "3B5F2909-9A85-4341-B40E-D01125CAA809",
+        "10DFF9D6-E98D-44C0-873D-574A17BDA395",
         "Root"
       ],
       {
@@ -47,6 +71,18 @@
     "objectMetadataList" : [
       [
         "65F6F990-A780-4474-B78B-572E0E4E273D",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "0476F9FF-594F-4FB8-8CA9-277205E9C07D" : {
+    "objectMetadataList" : [
+      [
+        "0476F9FF-594F-4FB8-8CA9-277205E9C07D",
         "Root"
       ],
       {
@@ -83,11 +119,12 @@
     "objectMetadataList" : [
       [
         "B2A257E5-0E51-45F8-891F-5F5B97C2A30F",
-        "Root"
+        "Root",
+        "Material_1"
       ],
       {
-        "isExpanded" : true,
-        "isLocked" : false
+        "isExpanded" : false,
+        "isLocked" : true
       },
       [
         "B2A257E5-0E51-45F8-891F-5F5B97C2A30F",
@@ -109,12 +146,11 @@
       },
       [
         "B2A257E5-0E51-45F8-891F-5F5B97C2A30F",
-        "Root",
-        "Material_1"
+        "Root"
       ],
       {
-        "isExpanded" : false,
-        "isLocked" : true
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -170,7 +206,9 @@
     "objectMetadataList" : [
       [
         "F94CA2DB-7D00-4F6B-B85F-50CBAF8168C6",
-        "Root"
+        "Root",
+        "Building_office_room_window",
+        "Meshes"
       ],
       {
         "isExpanded" : true,
@@ -188,8 +226,46 @@
       [
         "F94CA2DB-7D00-4F6B-B85F-50CBAF8168C6",
         "Root",
+        "Building_office_room_window",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "F94CA2DB-7D00-4F6B-B85F-50CBAF8168C6",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "F94CA2DB-7D00-4F6B-B85F-50CBAF8168C6",
+        "Root",
+        "Modern_Room",
+        "Meshes"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "F94CA2DB-7D00-4F6B-B85F-50CBAF8168C6",
+        "Root",
         "ImageToStl_com_room",
         "Book0"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "F94CA2DB-7D00-4F6B-B85F-50CBAF8168C6",
+        "Root",
+        "Modern_Room",
+        "Materials"
       ],
       {
         "isExpanded" : true,
@@ -202,71 +278,7 @@
       [
         "FE31BB63-366A-4297-9D0B-6BC6713E5955",
         "Root",
-        "interior",
-        "Materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FE31BB63-366A-4297-9D0B-6BC6713E5955",
-        "Root",
-        "interior",
-        "Geom",
-        "Box044"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FE31BB63-366A-4297-9D0B-6BC6713E5955",
-        "Root",
-        "interior",
-        "Geom",
-        "Plane001"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FE31BB63-366A-4297-9D0B-6BC6713E5955",
-        "Root",
-        "interior",
-        "Geom"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FE31BB63-366A-4297-9D0B-6BC6713E5955",
-        "Root",
-        "interior",
-        "Geom",
-        "Box046"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FE31BB63-366A-4297-9D0B-6BC6713E5955",
-        "Root",
-        "interior",
-        "Geom",
-        "Box006"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "FE31BB63-366A-4297-9D0B-6BC6713E5955",
-        "Root",
-        "interior"
+        "DirectorMovieChair"
       ],
       {
         "isExpanded" : true,

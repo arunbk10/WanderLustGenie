@@ -15,7 +15,7 @@ struct ImmersiveView: View {
     static var textureRequest: AnyCancellable?
     static var contentEntity = Entity()
 
-    @Environment(ChatViewModel .self) private var viewModel
+    @StateObject var viewModel: HotelViewModel
     @State var shouldShowText = true
 
     @State var animationEntity: Entity? = nil
@@ -38,69 +38,50 @@ struct ImmersiveView: View {
     }()
 
     var body: some View {
-        @Bindable var viewModel = viewModel
-        RealityView { content, attachments in
+        RealityView { content  in
             do
             {
-                // Add bot to the view
-                let bot = try await Entity(named: "Chatbot", in: realityKitContentBundle)
-                chatbotEntity.addChild(bot)
-                content.add(planeEntity)
-                content.add(chatbotEntity)
-                bot.setScale([0.08, 0.08, 0.08], relativeTo: bot)
-
-                // chat view on top of the bot
-                guard let attachmentEntity = attachments.entity(for: "attachment") else { return }
-                attachmentEntity.position = SIMD3<Float>(0.5, 0.5, 0)
-                let radians = 120 * Float.pi / 180
-                ImmersiveView.rotateEntityAroundYAxis(entity: attachmentEntity, angle: radians)
-                chatbotEntity.addChild(attachmentEntity)
-
-                // Add 3d room in immersive view
-                let room = try await Entity(named: "Room1", in: realityKitContentBundle)
-                content.add(room)
-                room.setScale([0.01,0.01,0.01], relativeTo: nil)
-                // Add panaromic lobby view as immersive view
-                room.addChild(ImmersiveView.setUpImmersiveEntity())
+                //
                 
-                guard let transform = attachments.entity(for: "mapWindow") else { return }
-                let flip = 270 * Float.pi / 180
-                ImmersiveView.rotateEntityAroundXAxis(entity: transform, angle: flip)
-                planeEntity.addChild(transform)
+                // Add bot to the view
+                //                let bot = try await Entity(named: "Chatbot", in: realityKitContentBundle)
+                //                chatbotEntity.addChild(bot)
+                //                content.add(planeEntity)
+                //                content.add(chatbotEntity)
+                //                bot.setScale([0.08, 0.08, 0.08], relativeTo: bot)
+                //
+                //                // chat view on top of the bot
+                //                guard let attachmentEntity = attachments.entity(for: "attachment") else { return }
+                //                attachmentEntity.position = SIMD3<Float>(0.5, 0.5, 0)
+                //                let radians = 120 * Float.pi / 180
+                //                ImmersiveView.rotateEntityAroundYAxis(entity: attachmentEntity, angle: radians)
+                //                chatbotEntity.addChild(attachmentEntity)
+                
+                // Add 3d room in immersive view
+                if let selectedRoom = viewModel.selectedRoom
+                {
+                    let room = try await Entity(named: "\(selectedRoom.sceneName)", in: realityKitContentBundle)
+                    content.add(room)
+                    if selectedRoom.id == 1 {
+                        room.setScale([0.01,0.01,0.01], relativeTo: nil)
+                    }
+                    // Add panaromic lobby view as immersive view
+                    room.addChild(ImmersiveView.setUpImmersiveEntity())
 
+                }
+                else {
+                    // do nothing
+                }
+                
+                //                guard let transform = attachments.entity(for: "mapWindow") else { return }
+                //                let flip = 270 * Float.pi / 180
+                //                ImmersiveView.rotateEntityAroundXAxis(entity: transform, angle: flip)
+                //                planeEntity.addChild(transform)
+                
             }
             catch
             {
                 print("error in reality view:\(error)")
-            }
-        } update: { _, _ in
-        } attachments: {
-            Attachment(id: "attachment") {
-                VStack {
-                    Text(viewModel.introText)
-                        .frame(maxWidth: 500, alignment: .leading)
-                        .font(.extraLargeTitle2)
-                        .fontWeight(.regular)
-                        .padding(30)
-                        .glassBackgroundEffect()
-                }.opacity(shouldShowText ? 1 : 0)
-            }
-            
-            Attachment(id: "mapWindow") {
-                MapView()
-            }
-        }
-        .gesture(SpatialTapGesture().targetedToAnyEntity().onEnded {
-            _ in
-            viewModel.flowState = .intro
-        })
-        .onChange(of: viewModel.flowState) { _, newValue in
-            switch newValue
-            {
-            case .idle:
-                showIntro()
-            case .intro, .listening, .output:
-                break
             }
         }
     }
@@ -178,9 +159,4 @@ struct ImmersiveView: View {
         // Apply the new transform to the entity
         entity.transform = currentTransform
     }
-}
-
-#Preview {
-    ImmersiveView()
-        .previewLayout(.sizeThatFits)
 }
